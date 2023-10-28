@@ -10,15 +10,20 @@
 void print_screen(char dp[WIDE][HEIGHT]);
 int neighbours(char dp[WIDE][HEIGHT], int i, int j);
 void clear_screen(void);
-void create_map(char dp[WIDE][HEIGHT]);
+void create_map(char dp[WIDE][HEIGHT], int spawn_needed);
+void copy(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT]);
+
 
 char cell = '*';
 char death = ' ';
 char mas[WIDE][HEIGHT]; //our map
+char prev_mas[WIDE][HEIGHT];
 
 int main(){
     srand(time(NULL));//initialisation for rand. called once.
-    create_map(mas); 
+    create_map(mas, 1); 
+    create_map(prev_mas, 0);
+    
 
     //infinity loop made with for
     for (;;){
@@ -30,31 +35,33 @@ int main(){
             for (int j = 1; j < HEIGHT -1; j++)
             {
              
+               
                 int neib = 0;
                 neib = neighbours(mas, i, j);
                 //if cell has 2or3 neighbours it will live, overwise it'll die
                 if (mas[i][j] == cell){
-                    if ((2 == neib) || (neib == 3))
-                        mas[i][j] = cell;
+                    if ((2 <= neib) && (neib <= 3))
+                        prev_mas[i][j] = cell;
                     else
-                        mas[i][j] = death;
+                        prev_mas[i][j] = death;
                 }
                 if (mas[i][j] == death){
                     if (neib == 3)
-                        mas[i][j] = cell;
+                        prev_mas[i][j] = cell;
                     else
-                        mas[i][j] = death;
+                        prev_mas[i][j] = death;
                 }
                     
             }
-            printf("\n");
         }
-    
+        copy(mas, prev_mas);//it will copy prev_mas to mas
+        create_map(prev_mas, 0); //it will clear prev_mas
     }
 
-   
+
     return 0;
 }
+
 
 
 int neighbours(char dp[WIDE][HEIGHT], int wide, int height){ //returns count of neighbours
@@ -96,13 +103,18 @@ void clear_screen()
     printf("\033[0;0f"); /* Move cursor to the top left hand corner */ 
 }
 
-void create_map(char dp[WIDE][HEIGHT])
+void create_map(char dp[WIDE][HEIGHT], int spawn_needed)
 {
-    
-    //spawn our cell on the map
-    for (int i = 0; i < CNT_OF_CELL; i++ ){
-        dp[rand()%WIDE][rand()%HEIGHT] = cell;
+    if (spawn_needed == 1)
+    {
+        //spawn our cell on the map
+        for (int i = 0; i < CNT_OF_CELL; i++ ){
+            dp[rand()%WIDE][rand()%HEIGHT] = cell;
+        }
     }
+
+    
+
 
     //make boarders
     for (int i = 0; i < WIDE; i++)
@@ -127,7 +139,17 @@ void create_map(char dp[WIDE][HEIGHT])
     dp[WIDE-1][0] = '+';
     dp[WIDE-1][HEIGHT-1] = '+';
 
-        
+    
+    
+}
+ 
+void copy(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT])
+{
+    for(int i = 0; i < WIDE; i++){
+        for (int j = 0; j < HEIGHT; j++){
+            mas[i][j] = dp[i][j];
+        }
+    }
 }
 
 
