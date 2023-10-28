@@ -12,7 +12,7 @@ int neighbours(char dp[WIDE][HEIGHT], int i, int j);
 void clear_screen(void);
 void create_map(char dp[WIDE][HEIGHT], int spawn_needed);
 void copy(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT]);
-
+int if_end(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT]);
 
 char cell = '*';
 char death = ' ';
@@ -53,6 +53,11 @@ int main(){
                 }
                     
             }
+        }
+        if (if_end(mas, prev_mas) == 1){//if game over print game over
+            clear_screen();
+            printf("Game Over");
+            break;
         }
         copy(mas, prev_mas);//it will copy prev_mas to mas
         create_map(prev_mas, 0); //it will clear prev_mas
@@ -152,4 +157,13 @@ void copy(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT])
     }
 }
 
-
+int if_end(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT]){
+    //checks if game is over
+    for(int i = 0; i < WIDE; i++){
+        for (int j = 0; j < HEIGHT; j++){
+            if (mas[i][j] != dp[i][j])
+                return 0; //if arrays arent the same
+        }
+    }
+    return 1;//if arrays are the same
+}
