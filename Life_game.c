@@ -25,14 +25,11 @@ int main(){
         //draw our map
         print_screen(mas);
         //check every argument in array
-        //for (int i = 1; i < WIDE -1; i++)
-        for (int i = WIDE-1; i > 1; i--)
+        for (int i = 1; i < WIDE -1; i++)
         {  
-            //for (int j = 1; j < HEIGHT -1; j++)
-            for (int j = HEIGHT-1; j>1; j--)
+            for (int j = 1; j < HEIGHT -1; j++)
             {
              
-               
                 int neib = 0;
                 neib = neighbours(mas, i, j);
                 //if cell has 2or3 neighbours it will live, overwise it'll die
@@ -58,19 +55,6 @@ int main(){
    
     return 0;
 }
-/*/
-    0
-    0
-    0
-
-   000
-
-     0
-    0
-    00
-*/
-
-
 
 
 int neighbours(char dp[WIDE][HEIGHT], int wide, int height){ //returns count of neighbours
@@ -119,14 +103,7 @@ void create_map(char dp[WIDE][HEIGHT])
     for (int i = 0; i < CNT_OF_CELL; i++ ){
         dp[rand()%WIDE][rand()%HEIGHT] = cell;
     }
-    
-/*
-    dp[9][6] = cell;
-    dp[7][7] = cell;
-    dp[8][7] = cell;
-    dp[8][8] = cell;
-    dp[9][7] = cell;
-*/
+
     //make boarders
     for (int i = 0; i < WIDE; i++)
     {
@@ -150,8 +127,7 @@ void create_map(char dp[WIDE][HEIGHT])
     dp[WIDE-1][0] = '+';
     dp[WIDE-1][HEIGHT-1] = '+';
 
-    
-    
+        
 }
 
 
