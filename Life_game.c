@@ -27,6 +27,7 @@ int main(){
     
 
     //infinity loop made with for
+    //infinity loop made with for
     for (;;){
         //draw our map
         print_screen(mas);
@@ -35,8 +36,6 @@ int main(){
         {  
             for (int j = 1; j < HEIGHT -1; j++)
             {
-             
-               
                 int neib = 0;
                 neib = neighbours(mas, i, j);
                 //if cell has 2or3 neighbours it will live, overwise it'll die
@@ -51,8 +50,7 @@ int main(){
                         prev_mas[i][j] = cell;
                     else
                         prev_mas[i][j] = death;
-                }
-                    
+                }    
             }
         }
         if (if_end(mas, prev_mas) == 1){//if game over print game over
@@ -62,11 +60,8 @@ int main(){
         }
         copy(mas, prev_mas);//it will copy prev_mas to mas
     }
-
-
     return 0;
 }
-
 
 
 int neighbours(char dp[WIDE][HEIGHT], int wide, int height){ //returns count of neighbours
