@@ -60,7 +60,6 @@ int main(){
             break;
         }
         copy(mas, prev_mas);//it will copy prev_mas to mas
-        create_map(prev_mas, 0); //it will clear prev_mas
     }
 
 
