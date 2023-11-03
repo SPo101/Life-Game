@@ -81,10 +81,7 @@ int neighbours(char dp[WIDE][HEIGHT], int wide, int height){ //returns count of 
     }
     //if place, which neighbours we a checking, is a cell
     //we shouldnt count it
-    if (dp[wide][height] == cell) 
-        return cnt-1;
-    else
-        return cnt;
+    return cnt - (dp[wide][height] == cell);
 }
 
 void print_screen(char dp[WIDE][HEIGHT]){
