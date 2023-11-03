@@ -16,10 +16,11 @@ int if_end(char mas[WIDE][HEIGHT], char dp[WIDE][HEIGHT]);
 
 char cell = '*';
 char death = ' ';
-char mas[WIDE][HEIGHT]; //our map
-char prev_mas[WIDE][HEIGHT];
 
 int main(){
+    char mas[WIDE][HEIGHT]; //our map
+    char prev_mas[WIDE][HEIGHT];
+    
     srand(time(NULL));//initialisation for rand. called once.
     create_map(mas, 1); 
     create_map(prev_mas, 0);
